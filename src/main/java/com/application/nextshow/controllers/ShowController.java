@@ -5,14 +5,13 @@ import com.application.nextshow.entities.Show;
 import com.application.nextshow.services.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
+@RequestMapping("/api/v1/shows")
 
 public class ShowController {
     @Autowired
@@ -22,17 +21,24 @@ public class ShowController {
         this.showService = showService;
     }
 
-    @GetMapping(value = "/api/v1/shows")
+    @GetMapping
     public List<ShowDTO> findAllShows(){
         return showService.findAllShows();
     }
-
-    @PostMapping(value = "/api/v1/save-show" )
+    @GetMapping("/id")
+    public ShowDTO findShowById(@PathVariable UUID id){
+        return showService.findShowById(id);
+    }
+    @PostMapping
     public ShowDTO saveShow(@RequestBody ShowDTO showDTO){
         return showService.saveShow(showDTO);
     }
-    @PostMapping(value = "/api/v1/save-all-shows")
+    @PostMapping("/bulk")
     public List<ShowDTO> savAllShow(@RequestBody List<ShowDTO> showDTO){
       return showService.saveAllShows(showDTO);
+    }
+    @DeleteMapping("/id")
+    public void deleteShowById(@PathVariable UUID id){
+        showService.deleteShowById(id);
     }
 }

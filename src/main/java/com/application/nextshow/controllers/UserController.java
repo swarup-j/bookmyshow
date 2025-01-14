@@ -11,6 +11,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/api/v1/users")
+
 public class UserController {
     @Autowired
     private final UserService userService;
@@ -18,26 +20,24 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
-    @GetMapping(value = "/api/v1/users")
+    @GetMapping
     public List<UserDTO> findAllUsers(){
         return userService.findAllUsers();
     }
-
-    @GetMapping(value = "/api/v1/user/{id}")
+    @GetMapping("/{id}")
     public Optional<UserDTO> findUserById(@PathVariable(name = "id") UUID id){
         return userService.findUserById(id);
     }
-    @PostMapping(value = "/api/v1/users")
+    @PostMapping("/bulk")
     public List<UserDTO> saveAllUsers(@RequestBody List<UserDTO> userDTOList){
         return userService.saveAllUsers(userDTOList);
     }
 
-    @PostMapping(value = "/api/v1/user")
+    @PostMapping
     public UserDTO saveUser(@RequestBody UserDTO userDTO) {
         return userService.saveUser(userDTO);
     }
-    @DeleteMapping(value = "/api/v1/delete-user/{id}")
+    @DeleteMapping("/{id}")
     public void deleteUserById(@PathVariable(name = "id") UUID id){
         userService.deleteUserById(id);
     }

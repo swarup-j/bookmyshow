@@ -18,22 +18,21 @@ import java.util.UUID;
 
 @Slf4j
 @RestController
+@RequestMapping("/api/v1/activities")
 public class ActivityController {
     @Autowired
     private final ActivityService activityService;
-
-
 
     public ActivityController(ActivityService activityService) {
         this.activityService = activityService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<ActivityDTO> getAllActivities(){
         return activityService.fetchAllActivities();
     }
 
-    @GetMapping(value = "/api/v1/activities")
+    @GetMapping(value = "/filter")
     public List<ActivityDTO> getActivitiesByFilters(
             @RequestParam(required = false) ActivityType category,
             @RequestParam(required = false) String[] formats,
@@ -45,33 +44,29 @@ public class ActivityController {
             @RequestParam(required = false) Double rating) {
         return activityService.getActivitiesByFilters(category, formats, genres, languages, releaseDateBefore, releaseDateAfter, venue, rating);
     }
-//    @GetMapping(value = "/api/v1/activities")
-//    public List<ActivityDTO> fetchAllActivities(){
-//        return activityService.fetchAllActivities();
-//    }
 
-    @GetMapping(value = "/api/v1/activity/{id}")
+
+    @GetMapping("/{id}")
     public ActivityDTO findById(@PathVariable(name = "id") UUID id){
         log.info(String.valueOf(id));
         return activityService.findById(id);
     }
 
-
-    @GetMapping(value = "/api/v1/activity/title/{title}")
+    @GetMapping("/title/{title}")
     public Optional<ActivityDTO> findByTitle(@PathVariable(name = "title")  String title){
         return activityService.findByTitle(title);
     }
 
-    @PostMapping(value = "/api/v1/save-activity")
+    @PostMapping
     public ActivityDTO saveActivity(@RequestBody ActivityDTO activityDTO ){
         return activityService.saveActivity(activityDTO);
 
     }
-    @PostMapping(value = "/api/v1/save-all-activities")
+    @PostMapping(   "/bulk")
     public List<ActivityDTO> saveAllActivities(@RequestBody List<ActivityDTO> activityDTOList){
         return activityService.saveAllActivities(activityDTOList);
     }
-    @DeleteMapping(value = "/api/v1/delete-activity/{id}")
+    @DeleteMapping("/{id}")
     public void deleteActivity(@PathVariable(name = "id") UUID id){
          activityService.deleteActivity(id);
     }

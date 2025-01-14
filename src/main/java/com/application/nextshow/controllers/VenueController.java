@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/api/v1/venues")
 public class VenueController {
     private final VenueService venueService;
 
@@ -17,31 +18,28 @@ public class VenueController {
     public VenueController(VenueService venueService) {
         this.venueService = venueService;
     }
-    @GetMapping(value = "/api/v1/venues")
+    @GetMapping
     public List<VenueDTO> getFilteredVenues(
             @RequestParam(required = false) String city,
-            @RequestParam(required = false) String[] formats)
-    {
+            @RequestParam(required = false) String[] formats) {
         return venueService.getFilteredVenues(city, formats);
     }
 
-
-
-    @GetMapping(value = "/api/v1/venues/{id}")
+    @GetMapping("/{id}")
     public Optional<VenueDTO> findVenueById(@PathVariable(name = "id") UUID id){
         return venueService.findVenueById(id);
     }
 
-    @PostMapping(value = "/api/v1/save-all-venues")
+    @PostMapping("/bulk")
     public List<VenueDTO> saveAllVenues(@RequestBody List<VenueDTO> venueDTOList){
         return venueService.saveAllVenues(venueDTOList);
     }
 
-    @PostMapping(value = "/api/v1/save-venue")
+    @PostMapping
     public VenueDTO saveVenue(@RequestBody VenueDTO venueDTO) {
         return venueService.saveVenue(venueDTO);
     }
-    @DeleteMapping(value = "/api/v1/delete-venue/{id}")
+    @DeleteMapping("/{id}")
     public void deleteVenue(@PathVariable(name = "id") UUID id){
         venueService.deleteVenueById(id);
     }
