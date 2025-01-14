@@ -1,0 +1,72 @@
+--
+--INSERT INTO activity (
+--    id, title, category, date, venue_id, formats, genres, description, movie_cast, crew, duration, artists, languages, trailer, rating
+--) VALUES
+--    (
+--        '123e4567-e89b-12d3-a456-426614174000',
+--        'Avengers: Endgame',
+--        0,
+--        '2025-02-15',
+--        '123e4567-e89b-12d3-a456-426614174001',
+--        ARRAY['IMAX', '3D', 'Standard'],
+--        ARRAY['Action', 'Sci-Fi'],
+--        'The epic conclusion to the Avengers saga.',
+--        ARRAY['Robert Downey Jr.', 'Chris Evans'],
+--        ARRAY['Joe Russo', 'Anthony Russo'],
+--        180,
+--        NULL,
+--        ARRAY['English', 'Hindi', 'Spanish'],
+--        'https://youtube.com/trailer-avengers-endgame',
+--        9.2
+--    ),
+--    (
+--        '223e4567-e89b-12d3-a456-426614174000',
+--        'Coldplay: Music of the Spheres Tour',
+--        1,
+--        '2025-03-10',
+--        '223e4567-e89b-12d3-a456-426614174001',
+--        ARRAY['Live'],
+--        ARRAY['Pop', 'Rock'],
+--        'Coldplays world tour concert.',
+--        NULL,
+--        ARRAY['Chris Martin', 'Jonny Buckland'],
+--        120,
+--        ARRAY['Coldplay'],
+--        ARRAY['English'],
+--        'https://youtube.com/trailer-coldplay-tour',
+--        8.8
+--    ),
+--    (
+--        '323e4567-e89b-12d3-a456-426614174000',
+--        'The Phantom of the Opera',
+--        3,
+--        '2025-04-20',
+--        '323e4567-e89b-12d3-a456-426614174001',
+--        ARRAY['Theater'],
+--        ARRAY['Drama', 'Musical'],
+--        'A captivating live performance of the classic play.',
+--        ARRAY['Actor 1', 'Actor 2'],
+--        ARRAY['Director 1', 'Director 2'],
+--        150,
+--        ARRAY['Main Actor'],
+--        ARRAY['English'],
+--        'https://youtube.com/trailer-phantom',
+--        9.0
+--    ),
+--    (
+--        '423e4567-e89b-12d3-a456-426614174000',
+--        'NBA Finals Game 5',
+--        4,
+--        '2025-05-25',
+--        '423e4567-e89b-12d3-a456-426614174001',
+--        ARRAY['Standard'],
+--        ARRAY['Basketball'],
+--        'The NBA Finals showdown.',
+--        NULL,
+--        NULL,
+--        120,
+--        ARRAY['Team A', 'Team B'],
+--        ARRAY['English'],
+--        'https://youtube.com/trailer-nba-finals',
+--        9.5
+--    );
