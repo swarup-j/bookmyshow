@@ -2,6 +2,7 @@ package com.application.nextshow.controllers;
 
 import com.application.nextshow.dtos.UserDTO;
 import com.application.nextshow.dtos.VenueDTO;
+import com.application.nextshow.entities.User;
 import com.application.nextshow.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,6 @@ import java.util.UUID;
 @RequestMapping("/api/v1/users")
 
 public class UserController {
-    @Autowired
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -41,4 +41,9 @@ public class UserController {
     public void deleteUserById(@PathVariable(name = "id") UUID id){
         userService.deleteUserById(id);
     }
+//    @PostMapping(value = "/login")
+//    public String login(@RequestBody User user){
+//        return userService.verify(user);
+//    }
+
 }

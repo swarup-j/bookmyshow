@@ -14,7 +14,7 @@ import java.util.UUID;
 public class VenueController {
     private final VenueService venueService;
 
-    @Autowired
+
     public VenueController(VenueService venueService) {
         this.venueService = venueService;
     }

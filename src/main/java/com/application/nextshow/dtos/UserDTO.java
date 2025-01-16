@@ -25,7 +25,7 @@ public class UserDTO {
     private Long phone;
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate birthDate;
-//    private String password;
+     private String password;
 //    private String resetPasswordToken;
 //
 //    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")

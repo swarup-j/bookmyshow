@@ -5,9 +5,11 @@ import com.application.nextshow.dtos.ShowDTO;
 import com.application.nextshow.entities.Activity;
 import com.application.nextshow.entities.enums.ActivityType;
 import com.application.nextshow.services.ActivityService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.DateFormat;
@@ -20,7 +22,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/activities")
 public class ActivityController {
-    @Autowired
+
     private final ActivityService activityService;
 
     public ActivityController(ActivityService activityService) {
@@ -71,5 +73,11 @@ public class ActivityController {
          activityService.deleteActivity(id);
     }
 
+
+    @GetMapping("/csrf")
+    public CsrfToken getToken(HttpServletRequest request){
+        return (CsrfToken) request.getAttribute("_csrf");
+
+    }
 
 }

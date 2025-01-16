@@ -7,18 +7,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ActivityMapper {
-    @Autowired
-    private  ActivityDTO activityDTO;
 
-    @Autowired
-    private  Activity activity;
 
 
 
 
 
     public  ActivityDTO toDTO(Activity activity){
-        return activityDTO.builder()
+        return ActivityDTO.builder()
                 .id(activity.getId())
                 .title(activity.getTitle())
                 .category(activity.getCategory())
@@ -36,7 +32,7 @@ public class ActivityMapper {
                 .build();
     }
     public  Activity fromDTO(ActivityDTO activityDTO){
-        return activity.builder()
+        return Activity.builder()
                 .id(activityDTO.getId())
                 .title(activityDTO.getTitle())
                 .category(activityDTO.getCategory())

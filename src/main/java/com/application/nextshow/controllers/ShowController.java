@@ -14,7 +14,7 @@ import java.util.UUID;
 @RequestMapping("/api/v1/shows")
 
 public class ShowController {
-    @Autowired
+
     private final ShowService showService;
 
     public ShowController(ShowService showService) {

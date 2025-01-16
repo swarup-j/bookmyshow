@@ -21,10 +21,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class ActivityServiceImpl implements ActivityService {
-    @Autowired
     private final ActivityRepository activityRepository;
 
-    @Autowired
     private final ActivityMapper activitymapper;
 
 

@@ -17,10 +17,8 @@ import java.util.stream.Collectors;
 @Service
 public class ShowServiceImpl implements ShowService {
 
-    @Autowired
     private final ShowRepository showRepository;
 
-    @Autowired
     private final ShowMapper showMapper;
 
     public ShowServiceImpl(ShowRepository showRepository, ShowMapper showMapper) {

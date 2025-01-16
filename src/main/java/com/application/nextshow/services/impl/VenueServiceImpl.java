@@ -20,10 +20,8 @@ import java.util.stream.Collectors;
 @Service
 public class VenueServiceImpl implements VenueService {
 
-    @Autowired
     private final VenueMapper venueMapper;
 
-    @Autowired
     private final VenueRepository venueRepository;
     public VenueServiceImpl(VenueMapper venueMapper, VenueRepository venueRepository) {
         this.venueMapper = venueMapper;

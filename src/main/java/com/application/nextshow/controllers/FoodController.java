@@ -15,7 +15,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/food")
 public class FoodController {
-    @Autowired
     private final FoodService foodService;
 
     public FoodController(FoodService foodService) {

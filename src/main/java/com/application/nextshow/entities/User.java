@@ -37,7 +37,7 @@ public class User {
     private String resetPasswordToken;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date resetPasswordGeneratedAt;
+    private LocalDateTime resetPasswordGeneratedAt;
 
     private RoleType role;
 

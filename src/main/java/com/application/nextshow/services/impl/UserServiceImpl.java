@@ -5,20 +5,18 @@ import com.application.nextshow.entities.User;
 import com.application.nextshow.mappers.UserMapper;
 import com.application.nextshow.repositories.UserRepository;
 import com.application.nextshow.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
     private final UserRepository userRepository;
 
-    @Autowired
     private final UserMapper userMapper;
 
     public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
@@ -63,5 +61,32 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
 
 
+    }
+
+
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    @Override
+    public void saveUser(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public Optional<User> findByResetToken(String token) {
+        return userRepository.findByResetPasswordToken(token);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        userRepository.save(user);
     }
 }
