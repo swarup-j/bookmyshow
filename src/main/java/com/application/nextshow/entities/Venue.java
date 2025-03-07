@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -31,7 +32,9 @@ public class Venue {
     private String address;
     private String city;
     private String[] facilities;
-    private String[] availableFormats;
+    private String[] formats;
+
+
     private Integer screens;
     private  Double[] coordinates;
     private String thumbnail;

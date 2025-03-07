@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface VenueService {
-     List<VenueDTO> getFilteredVenues(String city, String[] formats);
+     List<VenueDTO> getFilteredVenues(String city, String format);
     Optional<VenueDTO> findVenueById(UUID id);
     List<VenueDTO> saveAllVenues(List<VenueDTO> venueDTOS);
     VenueDTO saveVenue(VenueDTO venueDTO);

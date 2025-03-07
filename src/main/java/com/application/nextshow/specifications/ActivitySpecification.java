@@ -1,5 +1,6 @@
 package com.application.nextshow.specifications;
 
+import jakarta.persistence.criteria.Path;
 import org.springframework.data.jpa.domain.Specification;
 import jakarta.persistence.criteria.Predicate;
 import com.application.nextshow.entities.Activity;
@@ -21,11 +22,14 @@ public class ActivitySpecification {
     public static Specification<Activity> hasFormats(String[] formats) {
         return (root, query, criteriaBuilder) -> {
             if (formats != null && formats.length > 0) {
-                return root.get("formats").in((Object[]) formats);
+                // We assume that 'formats' is a String[] in the entity
+                // Use criteriaBuilder to check if any element in 'formats' array matches the 'formats' field in the entity
+                return root.get("formats").in((Object[]) formats); // Matching if any of the formats in the array is present in the entity's 'formats' array
             }
             return criteriaBuilder.conjunction(); // No formats filter if null or empty
         };
     }
+
 
     public static Specification<Activity> hasGenres(String[] genres) {
         return (root, query, criteriaBuilder) -> {
@@ -38,10 +42,13 @@ public class ActivitySpecification {
 
     public static Specification<Activity> hasLanguages(String[] languages) {
         return (root, query, criteriaBuilder) -> {
-            if (languages != null && languages.length > 0) {
-                return root.get("languages").in((Object[]) languages);
+            if (languages == null || languages.length == 0) {
+                return criteriaBuilder.conjunction(); // Always true condition if no languages
             }
-            return criteriaBuilder.conjunction(); // No languages filter if null or empty
+
+            // Create the predicate for the "IN" condition
+            Path<String> languagePath = root.get("languages");  // Assuming the field is "language"
+            return languagePath.in((Object[]) languages); // Cast to Object[] for the IN clause
         };
     }
 
@@ -91,7 +98,7 @@ public class ActivitySpecification {
         if (category != null) {
             spec = spec.and(hasCategory(category));  // Add category filter
         }
-        if (formats != null) {
+        if (formats != null && formats.length > 0) {
             spec = spec.and(hasFormats(formats)); // Add formats filter
         }
         if (genres != null) {

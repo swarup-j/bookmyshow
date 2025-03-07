@@ -29,8 +29,8 @@ public class VenueServiceImpl implements VenueService {
     }
 
     @Override
-    public List<VenueDTO> getFilteredVenues(String city, String[] formats){
-        Specification<Venue> spec = VenueSpecification.withFilters(city, formats);
+    public List<VenueDTO> getFilteredVenues(String city, String format){
+        Specification<Venue> spec = VenueSpecification.withFilters(city, format);
         List<Venue> venueList = venueRepository.findAll(spec);
         return venueList.stream().
                 map(venueMapper::toDTO)

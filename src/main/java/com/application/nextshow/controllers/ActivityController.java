@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.DateFormat;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -37,14 +38,18 @@ public class ActivityController {
     @GetMapping(value = "/filter")
     public List<ActivityDTO> getActivitiesByFilters(
             @RequestParam(required = false) ActivityType category,
-            @RequestParam(required = false) String[] formats,
+            @RequestParam(required = false ) String[] formats,
             @RequestParam(required = false) String[] genres,
             @RequestParam(required = false) String[] languages,
             @RequestParam(required = false) LocalDate releaseDateBefore,
             @RequestParam(required = false) LocalDate releaseDateAfter,
             @RequestParam(required = false) String venue,
             @RequestParam(required = false) Double rating) {
+        System.out.println(Arrays.toString(formats));
+
+
         return activityService.getActivitiesByFilters(category, formats, genres, languages, releaseDateBefore, releaseDateAfter, venue, rating);
+
     }
 
 
@@ -53,6 +58,7 @@ public class ActivityController {
         log.info(String.valueOf(id));
         return activityService.findById(id);
     }
+
 
     @GetMapping("/title/{title}")
     public Optional<ActivityDTO> findByTitle(@PathVariable(name = "title")  String title){
@@ -64,10 +70,12 @@ public class ActivityController {
         return activityService.saveActivity(activityDTO);
 
     }
-    @PostMapping(   "/bulk")
+
+    @PostMapping("/bulk")
     public List<ActivityDTO> saveAllActivities(@RequestBody List<ActivityDTO> activityDTOList){
         return activityService.saveAllActivities(activityDTOList);
     }
+
     @DeleteMapping("/{id}")
     public void deleteActivity(@PathVariable(name = "id") UUID id){
          activityService.deleteActivity(id);
@@ -77,7 +85,6 @@ public class ActivityController {
     @GetMapping("/csrf")
     public CsrfToken getToken(HttpServletRequest request){
         return (CsrfToken) request.getAttribute("_csrf");
-
     }
 
 }

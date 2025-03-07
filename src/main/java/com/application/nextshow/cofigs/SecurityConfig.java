@@ -1,17 +1,15 @@
 package com.application.nextshow.cofigs;
 
 import com.application.nextshow.services.CustomUserDetailsService;
-import com.application.nextshow.services.UserService;
-import jakarta.persistence.EntityNotFoundException;
-import jdk.jfr.Frequency;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -29,15 +27,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers(
-                                "/auth/register",
-                                "/auth/login",
-                                "/auth/forgot-password",
-                                "/auth/reset-password",
-                                "/auth/oauth2/google",
-                                "/auth/change-password"
-                                ).permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/api/v1/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/auth/*").permitAll()
+                        .requestMatchers( "/auth/*").permitAll()
+
                 )
                 .httpBasic(Customizer.withDefaults());
 
@@ -47,10 +40,7 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, PasswordEncoder passwordEncoder, CustomUserDetailsService userService) throws Exception {
-//        return http.getSharedObject(AuthenticationManagerBuilder.class)
-//                .userDetailsService(email -> userService.findByEmail(email).orElseThrow(() -> new EntityNotFoundException("User not found")))
-//                .passwordEncoder(passwordEncoder)
-//                .build();
+
         AuthenticationManagerBuilder authenticationManagerBuilder =
                 http.getSharedObject(AuthenticationManagerBuilder.class);
 

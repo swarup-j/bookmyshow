@@ -1,17 +1,17 @@
 package com.application.nextshow.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.databind.JsonNode;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.tomcat.util.json.JSONFilter;
 
 import java.time.LocalDateTime;
+import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -25,6 +25,8 @@ public class ScreenLayouts {
     private UUID id;
     //json data as string
     //need to make a convertor, declare string for nows
+ // Specify the JSONB column type
+
     private String layout;
     private  String name;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")

@@ -5,10 +5,7 @@ import com.application.nextshow.entities.enums.ActivityType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -32,9 +29,11 @@ public class Activity {
 @JsonFormat(pattern = "yyyy-MM-dd")
 private LocalDate date;
 
-  //  @ManyToOne
-//    @Column(nullable = false)
-    private UUID venueId;
+    @ManyToOne
+    @NonNull
+    @JoinColumn(name="venue_id")
+
+    private Venue venue;
     private String[] formats;
     private String[] genres;
     private String description;

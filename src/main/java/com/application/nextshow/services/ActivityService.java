@@ -17,7 +17,7 @@ public interface ActivityService {
    Optional<ActivityDTO> findByTitle(String title);
    ActivityDTO saveActivity(ActivityDTO activityDTO);
    void deleteActivity(UUID id);
-    public List<ActivityDTO> getActivitiesByFilters(ActivityType category, String[] formats, String[] genres,
+     List<ActivityDTO> getActivitiesByFilters(ActivityType category, String[] formats, String[] genres,
                                                  String[] languages, LocalDate releaseDateBefore,
                                                  LocalDate releaseDateAfter, String venue,
                                                  Double rating);

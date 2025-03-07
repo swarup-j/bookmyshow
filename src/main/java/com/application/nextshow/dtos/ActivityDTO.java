@@ -1,5 +1,6 @@
 package com.application.nextshow.dtos;
 
+import com.application.nextshow.entities.Venue;
 import com.application.nextshow.entities.enums.ActivityType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -29,8 +30,8 @@ public class ActivityDTO {
     private ActivityType category;
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate date;
-    //  @ManyToOne
-
+    private UUID venueId;
+    private Venue venue;
     private String[] formats;
     private String[] genres;
     private String description;

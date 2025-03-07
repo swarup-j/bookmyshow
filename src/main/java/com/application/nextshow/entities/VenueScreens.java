@@ -1,8 +1,6 @@
 package com.application.nextshow.entities;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,10 +17,12 @@ public class VenueScreens {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    //@ManyToOne
-    private UUID VenueId;
+
+    @ManyToOne
+    @JoinColumn(name="venue_id")
+    private Venue venue;
     private String name;
-    //@OneToOne
+    
     private UUID layoutId;
 
 
