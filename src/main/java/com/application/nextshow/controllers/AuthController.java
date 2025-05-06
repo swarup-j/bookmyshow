@@ -17,7 +17,7 @@ import java.util.UUID;
 
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/v1/auth")
 public class AuthController {
 
     private final UserService userService;
@@ -57,7 +57,7 @@ public class AuthController {
     }
 
 
-    // Endpoint for user login
+
     @PostMapping("/login")
     public String loginUser(@RequestBody LoginDTO loginDTO) {
         User user = userService.findByEmail(loginDTO.getEmail())
@@ -86,7 +86,6 @@ public class AuthController {
         return "Password reset email sent.";
     }
 
-    // Endpoint to reset the password
     @PostMapping("/reset-password")
     public String resetPassword(@RequestParam String token, @RequestParam String newPassword) {
         User user = userService.findByResetToken(token)
