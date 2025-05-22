@@ -5,9 +5,13 @@ import com.application.nextshow.dtos.ShowDTO;
 import com.application.nextshow.entities.Activity;
 import com.application.nextshow.entities.Show;
 import com.application.nextshow.repositories.ActivityRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.Builder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 @Configuration
 public class AppConfigs {
@@ -30,6 +34,15 @@ public class AppConfigs {
     public Show show(){
         return new Show();
     }
+    @Bean
+    public ObjectMapper objectMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        return mapper;
+    }
+
+
 
 
 }

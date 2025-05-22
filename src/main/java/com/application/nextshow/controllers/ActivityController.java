@@ -1,24 +1,18 @@
 package com.application.nextshow.controllers;
 
 import com.application.nextshow.dtos.ActivityDTO;
-import com.application.nextshow.dtos.ShowDTO;
-import com.application.nextshow.entities.Activity;
+
 import com.application.nextshow.entities.enums.ActivityType;
 import com.application.nextshow.services.ActivityService;
-import jakarta.servlet.http.HttpServletRequest;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Slf4j
+
 @RestController
 @RequestMapping("/api/v1/activities")
 public class ActivityController {
@@ -37,22 +31,28 @@ public class ActivityController {
     @GetMapping(value = "/filter")
     public List<ActivityDTO> getActivitiesByFilters(
             @RequestParam(required = false) ActivityType category,
-            @RequestParam(required = false) String[] formats,
+            @RequestParam(required = false ) String[] formats,
             @RequestParam(required = false) String[] genres,
             @RequestParam(required = false) String[] languages,
             @RequestParam(required = false) LocalDate releaseDateBefore,
             @RequestParam(required = false) LocalDate releaseDateAfter,
             @RequestParam(required = false) String venue,
+            @RequestParam(required = false) UUID venueId,
             @RequestParam(required = false) Double rating) {
+        System.out.println(Arrays.toString(formats));
+
+
         return activityService.getActivitiesByFilters(category, formats, genres, languages, releaseDateBefore, releaseDateAfter, venue, rating);
+
     }
 
 
     @GetMapping("/{id}")
     public ActivityDTO findById(@PathVariable(name = "id") UUID id){
-        log.info(String.valueOf(id));
         return activityService.findById(id);
     }
+
+
 
     @GetMapping("/title/{title}")
     public Optional<ActivityDTO> findByTitle(@PathVariable(name = "title")  String title){
@@ -64,20 +64,27 @@ public class ActivityController {
         return activityService.saveActivity(activityDTO);
 
     }
-    @PostMapping(   "/bulk")
+
+    @PostMapping("/bulk")
     public List<ActivityDTO> saveAllActivities(@RequestBody List<ActivityDTO> activityDTOList){
         return activityService.saveAllActivities(activityDTOList);
     }
+
+    @PutMapping("/{id}")
+    public ActivityDTO updateActivity(@PathVariable(name = "id") UUID id,
+                                      @RequestBody ActivityDTO activityDTO) {
+        return activityService.updateActivity(id, activityDTO);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteActivity(@PathVariable(name = "id") UUID id){
-         activityService.deleteActivity(id);
+        activityService.deleteActivity(id);
     }
 
 
-    @GetMapping("/csrf")
-    public CsrfToken getToken(HttpServletRequest request){
-        return (CsrfToken) request.getAttribute("_csrf");
-
-    }
+//    @GetMapping("/csrf")
+//    public CsrfToken getToken(HttpServletRequest request){
+//        return (CsrfToken) request.getAttribute("_csrf");
+//    }
 
 }
