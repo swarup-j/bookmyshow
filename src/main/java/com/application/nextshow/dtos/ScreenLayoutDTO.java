@@ -1,19 +1,18 @@
 package com.application.nextshow.dtos;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
+import com.fasterxml.jackson.databind.JsonNode;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+/**
+ * DTO class for creating a new Product request.
+ */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ScreenLayoutDTO {
-
-    // UUID id;
-    //json data as string
-    //need to make a convertor, declare string for nows
-    private String layout;
-    private  String name;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime created;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updated;
+    private String name;
+    private JsonNode layout;
 }

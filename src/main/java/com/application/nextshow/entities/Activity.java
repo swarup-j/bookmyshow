@@ -5,10 +5,7 @@ import com.application.nextshow.entities.enums.ActivityType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -28,13 +25,14 @@ public class Activity {
     private String title;
     private ActivityType category;
 
-//    @Column(nullable = false)
-@JsonFormat(pattern = "yyyy-MM-dd")
-private LocalDate date;
+    //    @Column(nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date;
 
-  //  @ManyToOne
-//    @Column(nullable = false)
-    private UUID venueId;
+    @ManyToOne
+    @JoinColumn(name="venue_id")
+
+    private Venue venue;
     private String[] formats;
     private String[] genres;
     private String description;
@@ -46,10 +44,22 @@ private LocalDate date;
     private String[] languages;
     private String trailer;
     private Double rating;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime created;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updated;
+
+    @PrePersist
+    public void prePersist() {
+        LocalDateTime now = LocalDateTime.now();
+        this.created = now;
+        this.updated = now;
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.updated = LocalDateTime.now();
+    }
 
 
 }

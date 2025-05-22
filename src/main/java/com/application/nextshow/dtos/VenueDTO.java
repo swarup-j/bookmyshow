@@ -23,7 +23,7 @@ public class VenueDTO {
     private String address;
     private String city;
     private String[] facilities;
-    private String[] availableFormats;
+    private String[] formats;
     private Integer screens;
     private  Double[] coordinates;
     private String thumbnail;

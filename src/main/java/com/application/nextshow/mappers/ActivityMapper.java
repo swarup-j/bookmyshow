@@ -2,6 +2,7 @@ package com.application.nextshow.mappers;
 
 import com.application.nextshow.dtos.ActivityDTO;
 import com.application.nextshow.entities.Activity;
+import com.application.nextshow.repositories.VenueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,11 @@ public class ActivityMapper {
 
 
 
+    private final VenueRepository venueRepository;
+
+    public ActivityMapper(VenueRepository venueRepository) {
+        this.venueRepository = venueRepository;
+    }
 
 
     public  ActivityDTO toDTO(Activity activity){
@@ -28,6 +34,7 @@ public class ActivityMapper {
                 .description(activity.getDescription())
                 .movieCast(activity.getMovieCast())
                 .crew(activity.getCrew())
+                .venue(activity.getVenue())
                 .rating(activity.getRating())
                 .duration(activity.getDuration())
                 .artists(activity.getArtists())
@@ -38,6 +45,10 @@ public class ActivityMapper {
     public  Activity fromDTO(ActivityDTO activityDTO){
         return activity.builder()
                 .id(activityDTO.getId())
+                .venue(venueRepository.findById(activityDTO.getVenueId())
+                        .orElseThrow(()->new RuntimeException("venue not found"))
+
+                )
                 .title(activityDTO.getTitle())
                 .category(activityDTO.getCategory())
                 .date(activityDTO.getDate())

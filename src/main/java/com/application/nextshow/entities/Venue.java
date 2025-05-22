@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -27,11 +28,14 @@ public class Venue {
     private String description;
     //@Column(nullable = false)
     private VenueType venueType;
-   // @Column(nullable = false)
+    // @Column(nullable = false)
     private String address;
     private String city;
     private String[] facilities;
-    private String[] availableFormats;
+
+    private String[] formats;
+
+
     private Integer screens;
     private  Double[] coordinates;
     private String thumbnail;
@@ -41,5 +45,16 @@ public class Venue {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updated;
 
+    @PrePersist
+    public void prePersist() {
+        LocalDateTime now = LocalDateTime.now();
+        this.created = now;
+        this.updated = now;
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.updated = LocalDateTime.now();
+    }
 
 }

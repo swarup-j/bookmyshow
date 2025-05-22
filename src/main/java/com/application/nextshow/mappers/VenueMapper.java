@@ -19,7 +19,6 @@ public class VenueMapper {
                 .description(venue.getDescription())
                 .facilities(venue.getFacilities())
                 .thumbnail(venue.getThumbnail())
-                .availableFormats(venue.getAvailableFormats())
                 .build();
     }
 
@@ -36,7 +35,6 @@ public class VenueMapper {
                 .description(venueDTO.getDescription())
                 .facilities(venueDTO.getFacilities())
                 .thumbnail(venueDTO.getThumbnail())
-                .availableFormats(venueDTO.getAvailableFormats())
                 .build();
     }
 
